@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+<!--
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Sample Category"
+            id="org.decentipede.eclipse.debug.extensions.commands.category">
+      </category>
+            <command
+            categoryId="org.eclipse.debug.ui.category.run"
+            description="%ActionDefinition.allReferences.description"
+            helpContextId="all_references_action_context"
+            id="org.eclipse.jdt.debug.ui.commands.AllReferences"
+            name="%ActionDefinition.allReferences.name">
+      </command>
+
+   </extension>
+   
+   -->
+   
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="sics.debug.extensions.contribution1"
+            objectClass="org.eclipse.jdt.debug.core.IJavaVariable">
+                     <menu
+               id="decentipede.debug.extensions.variable.menu"
+               label="Decentipede">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+            <action
+                  id="org.decentipede.eclipse.debug.extensions.show.class.loader"
+                  menubarPath="decentipede.debug.extensions.variable.menu/group1"
+                  class="no.kantega.decentipede.debug.extensions.action.InspectClassLoaderActionDelegate"
+                  label="Inspect Classloader"                 
+                  >
+                                             <enablement>
+
+                                 <systemProperty
+                                       name="org.eclipse.jdt.debug.ui.debuggerActive"
+                                       value="true">
+                                 </systemProperty>
+
+            </enablement>
+            </action>
+            <action
+                  id="org.decentipede.eclipse.debug.extensions.show.class.loader"
+                  menubarPath="decentipede.debug.extensions.variable.menu/group1"
+                  class="no.kantega.decentipede.debug.extensions.action.InspectClassObjectActionDelegate"
+                  label="Inspect Class Object"                 
+                  >
+                                             <enablement>
+
+                                 <systemProperty
+                                       name="org.eclipse.jdt.debug.ui.debuggerActive"
+                                       value="true">
+                                 </systemProperty>
+
+            </enablement>
+            </action>
+         </objectContribution>
+      
+   </extension>
+            
+            
+           
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="org.decentipede.eclipse.debug.extensions.commands.sampleCommand"
+            class="org.decentipede.eclipse.debug.extensions.handlers.DecentipedeHandler">
+      </handler>
+   </extension>
+<!--   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.decentipede.eclipse.debug.extensions.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension> -->
+   
+   <!--
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Sample Menu"
+               mnemonic="M"
+               id="org.decentipede.eclipse.debug.extensions.menus.sampleMenu">
+            <command
+                  commandId="org.decentipede.eclipse.debug.extensions.commands.sampleCommand"
+                  mnemonic="S"
+                  id="org.decentipede.eclipse.debug.extensions.menus.sampleCommand">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="org.decentipede.eclipse.debug.extensions.toolbars.sampleToolbar">
+            <command
+                  commandId="org.decentipede.eclipse.debug.extensions.commands.sampleCommand"
+                  icon="icons/sample.gif"
+                  tooltip="Say hello world"
+                  id="org.decentipede.eclipse.debug.extensions.toolbars.sampleCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            id="org.decentipede.eclipse.debug.extensions.contribution1">
+         <menu
+               label="Debug Extensions"
+               path="additions"
+               id="org.decentipede.eclipse.debug.extensions.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Implementors"
+               class="org.decentipede.eclipse.debug.extensions.popup.actions.ShowImplementors"
+               menubarPath="org.decentipede.eclipse.debug.extensions.menu1/group1"
+               enablesFor="1"
+               id="org.decentipede.eclipse.debug.extensions.newAction">
+         </action>
+      </objectContribution>
+   </extension> -->
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.jdt.debug.ui.JavaDebugPreferencePage"
+            class="org.decentipede.eclipse.debug.extensions.preferences.DecentipedePreferences"
+            id="org.decentipede.preferences"
+            name="Decentipede">
+            <keywordReference id="org.eclipse.debug.ui.general"/>
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.decentipede.eclipse.debug.extensions.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            category="Debug"
+            defaultHandler="org.decentipede.eclipse.debug.handlers.StackFilter"
+            description="Filter out stack frames"
+            id="org.decentipede.eclipse.debug.extensions.StackFilter"
+            name="StackFilter">
+         <commandParameter
+               id="org.decentipede.eclipse.debug.extensions.filterName"
+               name="filterName"
+               optional="false">
+         </commandParameter>
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            class="org.decentipede.eclipse.debug.extensions.popup.StackFiltersDynamicMenu"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="Decentipede">
+            <command
+                  commandId="org.decentipede.eclipse.debug.extensions.StackFilter"
+                  label="Filter Stack Frames"
+                  style="pulldown"
+                  tooltip="Manage stack frame filters">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+<!--   <extension
+         point="org.eclipse.debug.core.logicalStructureTypes">
+      <logicalStructureType
+            class="org.decentipede.eclipse.debug.extensions.LogicalStructureTypeDelegate1"
+            description="Show references back to GC roots"
+            id="org.decentipede.eclipse.debug.extensions.gcRoots"
+            modelIdentifier="org.decentipede.eclipse.debug.extensions.gcRoots">
+      </logicalStructureType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.logicalStructureProviders">
+      <logicalStructureProvider
+            class="org.decentipede.eclipse.debug.extensions.LogicalStructureProvider1"
+            modelIdentifier="org.decentipede.eclipse.debug.extensions.logicalStructureProvider1">
+      </logicalStructureProvider>
+   </extension> -->
+   <!--
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Decentipede - Java Debug Extensions"
+            visible="false"
+            id="org.eclipse.jdt.debug.ui.DecentipedeActionSet">
+         <menu
+               label="Decentipede"
+               path="additions"
+               id="org.eclipse.ui.run">
+            <separator
+                  name="decentipedeGroup">
+            </separator>
+         </menu>
+                  <action
+               class="no.kantega.decentipede.debug.extensions.action.ShowClassLoaderActionDelegate"
+               definitionId="org.eclipse.jdt.debug.ui.commands.ShowClassloader"
+               helpContextId="all_references_action_context"
+               icon="icons/full/elcl16/all_references.gif"
+               id="org.eclipse.jdt.debug.ui.actions.ShowClassloader"
+               label="Show classloader"
+               menubarPath="org.eclipse.ui.run/jdtGroup"
+               tooltip="Show the class loader of the object">
+                           <enablement>
+                              <and>
+                                 <systemProperty
+                                       name="org.eclipse.jdt.debug.ui.debuggerActive"
+                                       value="true">
+                                 </systemProperty>
+                                 <systemProperty
+                                       name="org.eclipse.jdt.debug.ui.supportsInstanceRetrieval"
+                                       value="true">
+                                 </systemProperty>
+                                 <objectClass
+                                       name="org.eclipse.jdt.debug.core.IJavaVariable">
+                                 </objectClass>
+                              </and>
+            </enablement>
+         </action>
+         
+    	</actionSet>
+    	
+    </extension> -->
+
+
+</plugin>
