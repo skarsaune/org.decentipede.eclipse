@@ -32,7 +32,7 @@ public class StackFilter implements IHandler {
 
 	@Override
 	public boolean isHandled() {
-		return false;
+		return true;
 	}
 
 	@Override

@@ -64,18 +64,44 @@
             </enablement>
             </action>
          </objectContribution>
+      <objectContribution
+            id="org.decentipede.eclipse.debug.extensions.frameFilters"
+            objectClass="org.eclipse.jdt.debug.core.IJavaStackFrame">
+         <menu
+               id="org.decentipede.eclipse.debug.extensions.frameFiltersMenu"
+               label="Stack Frame Filters">
+            <separator
+                  name="filters">
+            </separator>
+            <separator
+                  name="additions">
+            </separator>
+            
+            <separator
+                  name="settings">
+            </separator>
+            
+         </menu>
+         
+         <action
+               class="org.decentipede.eclipse.debug.extensions.popup.actions.FilterSyntethicMethods"
+               id="org.decentipede.eclipse.debug.extensions.filterSyntethicMethods"
+               label="Filter Syntethic Methods"
+               menubarPath="org.decentipede.eclipse.debug.extensions.frameFiltersMenu/filters">
+         </action>
+         <action
+               class="org.decentipede.eclipse.debug.extensions.popup.actions.EditFrameFilters"
+               id="org.decentipede.eclipse.debug.extensions.editFrameFilters"
+               label="Edit Filters ..."
+               menubarPath="org.decentipede.eclipse.debug.extensions.frameFiltersMenu/settings">
+         </action>
+      </objectContribution>
       
    </extension>
             
             
            
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            commandId="org.decentipede.eclipse.debug.extensions.commands.sampleCommand"
-            class="org.decentipede.eclipse.debug.extensions.handlers.DecentipedeHandler">
-      </handler>
-   </extension>
+
 <!--   <extension
          point="org.eclipse.ui.bindings">
       <key
@@ -156,7 +182,6 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            category="Debug"
             defaultHandler="org.decentipede.eclipse.debug.handlers.StackFilter"
             description="Filter out stack frames"
             id="org.decentipede.eclipse.debug.extensions.StackFilter"
@@ -171,18 +196,32 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            allPopups="false"
-            class="org.decentipede.eclipse.debug.extensions.popup.StackFiltersDynamicMenu"
+            class="org.decentipede.eclipse.debug.extensions.popup.StackFiltersDynamicMenuBuilder"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <menu
-               label="Decentipede">
-            <command
-                  commandId="org.decentipede.eclipse.debug.extensions.StackFilter"
-                  label="Filter Stack Frames"
-                  style="pulldown"
-                  tooltip="Manage stack frame filters">
-            </command>
-         </menu>
+            
+            
+            
+            <menu
+                  label="Stack Frame Filters" id="org.decentipede.eclipse.debug.extensions.menu2" tooltip="tooltip">
+                  <dynamic
+                        id="org.decentipede.eclipse.debug.extensions.dynamic1" class="org.decentipede.eclipse.debug.extensions.popup.StackFiltersDynamicMenu">
+                        
+                  </dynamic>
+                  <visibleWhen 
+                        checkEnabled="false">
+                        
+
+                        	<instanceof
+                              value="org.eclipse.jdt.debug.core.IJavaStackFrame">
+                        	</instanceof>
+                        	
+  <!--                      	<systemProperty
+                                       name="org.eclipse.jdt.debug.ui.debuggerActive"
+                                       value="true">
+                             </systemProperty> -->
+                  </visibleWhen>
+                  
+            </menu>
       </menuContribution>
    </extension>
 <!--   <extension

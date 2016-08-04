@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.ui.IDebugView;
 import org.eclipse.jdt.debug.core.IJavaStackFrame;
+import org.eclipse.jdt.internal.debug.core.model.JDIStackFrame;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredViewer;
@@ -31,6 +32,7 @@ public class FilterFramesAction implements IObjectActionDelegate {
 			if(node instanceof IJavaStackFrame)
 			{
 				try {
+					((JDIStackFrame) node).getUnderlyingMethod().isSynthetic();
 					final String typeName = ((IJavaStackFrame) node).getDeclaringTypeName();					
 					
 					if(exclusionPatterns.isEmpty())
