@@ -203,12 +203,12 @@
             
             <menu
                   label="Stack Frame Filters" id="org.decentipede.eclipse.debug.extensions.menu2" tooltip="tooltip">
-                  <dynamic
+<!--                  <dynamic
                         id="org.decentipede.eclipse.debug.extensions.dynamic1" class="org.decentipede.eclipse.debug.extensions.popup.StackFiltersDynamicMenu">
                         
-                  </dynamic>
+                  </dynamic> -->
                   <visibleWhen 
-                        checkEnabled="false">
+                        checkEnabled="true">
                         
 
                         	<instanceof

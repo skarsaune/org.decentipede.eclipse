@@ -1,57 +1,58 @@
 package org.decentipede.eclipse.debug.extensions.popup.actions;
 
-import org.eclipse.debug.ui.IDebugView;
+import org.eclipse.jdt.debug.core.IJavaStackFrame;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
 
-public abstract class ToggleFilterAction implements IObjectActionDelegate{
+public abstract class ToggleFilterAction implements IObjectActionDelegate , SelectionListener{
 	private StructuredViewer viewer;
-	protected boolean filterActive;
-	private final ViewerFilter filter=makeFilter();
+
 
 	@Override
 	public void run(IAction paramIAction) {
-		filterActive = !filterActive;
-		paramIAction.setChecked(filterActive);
+		toggleFilter();
 		this.viewer.refresh();
 	}
 
-	abstract ViewerFilter makeFilter();
+
+	
+	public abstract String name();
 
 	@Override
 	public void selectionChanged(IAction paramIAction,
 			ISelection paramISelection) {		
 	}
 
+
+
+
+	
+	public abstract boolean isFilterActive();
+	
 	@Override
-	public void setActivePart(IAction paramIAction,
-			IWorkbenchPart targetPart) {
-		if(targetPart instanceof IDebugView && targetPart.getClass().getSimpleName().equals("LaunchView"))
-		{
-			final Viewer partViewer = ((IDebugView)targetPart).getViewer();
-			if(partViewer instanceof StructuredViewer)
-			{
-				this.viewer = (StructuredViewer) partViewer;
-				addMyFilter(this.viewer);
-			}
-			
-		}		
+	public void widgetSelected(SelectionEvent e){
+		if(e.widget instanceof MenuItem) {
+			((MenuItem)e.widget).setSelection(this.toggleFilter());
+		}
 	}
 
-	private void addMyFilter(final StructuredViewer viewer) {
-		//check if for some reason filter has already been added
-		for (ViewerFilter viewerFilter : viewer.getFilters()) {
-			if(viewerFilter==this.filter) {
-				return;
-			}
-		}
-		
-		viewer.addFilter(this.filter);
-		
+	abstract boolean toggleFilter(); 
+	
+	@Override
+	public void widgetDefaultSelected(SelectionEvent e) {		
 	}
+
+
+
+	public abstract boolean filter(IJavaStackFrame node, String stackFrameText);
+
+
+
+
+
 }

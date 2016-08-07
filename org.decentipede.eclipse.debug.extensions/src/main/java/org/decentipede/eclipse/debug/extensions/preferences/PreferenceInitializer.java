@@ -6,6 +6,7 @@ import no.kantega.decentipede.debug.extensions.action.FrameFilterRepository;
 
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
@@ -24,6 +25,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_EMIT_WALKBACKS, false);
 		try {
 			store.setDefault(PreferenceConstants.P_STACK_FILTERS, FrameFilterRepository.factoryDefaults().asPropertyString());
+			//ensure persistent representation
+			((IPersistentPreferenceStore) store).save();
 		} catch (IOException ignore) {
 		}
 	}

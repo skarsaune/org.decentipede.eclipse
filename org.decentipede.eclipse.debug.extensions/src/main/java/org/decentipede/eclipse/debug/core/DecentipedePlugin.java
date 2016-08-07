@@ -31,6 +31,8 @@ public class DecentipedePlugin {
         return preferenceStore;
 	}
 	
+	
+	
 	public FrameFilterRepository getFrameFilterRepository() {
 		if(this.repository!= null) {
 			return this.repository;
