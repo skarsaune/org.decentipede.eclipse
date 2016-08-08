@@ -95,7 +95,7 @@ public class FrameFilterRepository extends ViewerFilter implements ISelectionLis
 	public static FrameFilterRepository fromPropertyString(
 			final String propertyString) throws IOException {
 		FrameFilterRepository repository = new FrameFilterRepository();
-		for (String filterSetName : propertyString.split(";")) {
+		for (String filterSetName : propertyString.split(",")) {
 			if(filterSetName.trim().length() > 0) {
 				repository.addFilter(FrameFilterSet.load(filterSetName));
 			}

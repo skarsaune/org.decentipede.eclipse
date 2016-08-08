@@ -1,5 +1,6 @@
 package no.kantega.decentipede.debug.extensions.action;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,6 +9,7 @@ import java.util.regex.Pattern;
 
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
 import org.eclipse.jdt.debug.core.IJavaStackFrame;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 public class FrameFilterSet extends ToggleableFilter implements Comparable<FrameFilterSet> , FrameFilter  {
@@ -84,6 +86,10 @@ public class FrameFilterSet extends ToggleableFilter implements Comparable<Frame
 		store.setValue("filter." + name() + ".name", name());
 		store.setValue("filter." + name() + ".exclusions", delimitedString());
 		store.setValue("filter." + name() + ".enabled", isFilterActive());
+		try {
+			DecentipedePlugin.getDefault().getPreferenceStore().save();
+		} catch (IOException e) {
+		}
 	}
 	
 	public static FrameFilterSet load(final String name) {

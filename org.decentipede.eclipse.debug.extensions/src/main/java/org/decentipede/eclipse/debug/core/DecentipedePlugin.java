@@ -4,6 +4,7 @@ import no.kantega.decentipede.debug.extensions.action.FrameFilterRepository;
 
 import org.decentipede.eclipse.debug.extensions.preferences.PreferenceConstants;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
@@ -22,7 +23,7 @@ public class DecentipedePlugin {
 		return plugin;
 	}
 
-	public IPreferenceStore getPreferenceStore() {
+	public IPersistentPreferenceStore getPreferenceStore() {
         // Create the preference store lazily.
         if (preferenceStore == null) {
             preferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE,"Decentipede");
