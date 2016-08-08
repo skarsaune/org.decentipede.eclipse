@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.decentipede.eclipse.extension.feature"
+      label="Decentipede Debugging Extensions"
+      version="1.0.0.qualifier"
+      provider-name="Martin Skarsaune">
+
+   <description url="http://www.example.com/description">
+      Decentipede contains various extensions and extra features to
+debugging in Eclipse: 
+
+- stack frame filters
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      Works in progress by Martin Skarsaune
+   </copyright>
+
+   <license url="http://www.eclipse.org">
+      Eclipse Public License - v 1.0
+   </license>
+
+   <plugin
+         id="org.decentipede.eclipse.debug.extensions"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
