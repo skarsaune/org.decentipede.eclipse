@@ -1,8 +1,8 @@
 package org.decentipede.eclipse.debug.extensions.preferences;
 
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
-import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -39,17 +39,17 @@ public class DecentipedePreferences
 	public void createFieldEditors() {
 		
 
-		addField(
-			new BooleanFieldEditor(
-				PreferenceConstants.P_ANALYZE_NULLPOINTERS,
-				"&Analyze NullPointerExceptions for cause",
-				getFieldEditorParent()));
-
-		addField(
-				new BooleanFieldEditor(
-						PreferenceConstants.P_EMIT_WALKBACKS,
-						"&Emit walkbacks on errors",
-						getFieldEditorParent()));
+//		addField(
+//			new BooleanFieldEditor(
+//				PreferenceConstants.P_ANALYZE_NULLPOINTERS,
+//				"&Analyze NullPointerExceptions for cause",
+//				getFieldEditorParent()));
+//
+//		addField(
+//				new BooleanFieldEditor(
+//						PreferenceConstants.P_EMIT_WALKBACKS,
+//						"&Emit walkbacks on errors",
+//						getFieldEditorParent()));
 		
 		addField( new StackFiltersViewer(PreferenceConstants.P_STACK_FILTERS, "Stack frame filters", getFieldEditorParent()));
 	}
@@ -59,6 +59,7 @@ public class DecentipedePreferences
 	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
 	public void init(IWorkbench workbench) {
+		workbench.getService(ISelectionService.class);
 	}
 	
 }

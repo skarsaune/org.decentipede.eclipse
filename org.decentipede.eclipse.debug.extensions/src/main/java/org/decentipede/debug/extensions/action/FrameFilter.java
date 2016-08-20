@@ -1,4 +1,4 @@
-package no.kantega.decentipede.debug.extensions.action;
+package org.decentipede.debug.extensions.action;
 
 import org.eclipse.jdt.debug.core.IJavaStackFrame;
 

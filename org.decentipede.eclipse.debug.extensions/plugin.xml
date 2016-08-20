@@ -24,11 +24,11 @@
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
-            id="sics.debug.extensions.contribution1"
+            id="org.decentipede.debug.extensions.variableContribution"
             objectClass="org.eclipse.jdt.debug.core.IJavaVariable">
                      <menu
                id="decentipede.debug.extensions.variable.menu"
-               label="Decentipede">
+               label="Inspect">
             <separator
                   name="group1">
             </separator>
@@ -36,8 +36,8 @@
             <action
                   id="org.decentipede.eclipse.debug.extensions.show.class.loader"
                   menubarPath="decentipede.debug.extensions.variable.menu/group1"
-                  class="no.kantega.decentipede.debug.extensions.action.InspectClassLoaderActionDelegate"
-                  label="Inspect Classloader"                 
+                  class="org.decentipede.debug.extensions.action.InspectClassLoaderActionDelegate"
+                  label="Classloader"                 
                   >
                                              <enablement>
 
@@ -51,8 +51,8 @@
             <action
                   id="org.decentipede.eclipse.debug.extensions.show.class.loader"
                   menubarPath="decentipede.debug.extensions.variable.menu/group1"
-                  class="no.kantega.decentipede.debug.extensions.action.InspectClassObjectActionDelegate"
-                  label="Inspect Class Object"                 
+                  class="org.decentipede.debug.extensions.action.InspectClassObjectActionDelegate"
+                  label="Class Object"                 
                   >
                                              <enablement>
 
@@ -65,6 +65,39 @@
             </action>
          </objectContribution>
       <objectContribution
+            adaptable="false"
+            id="org.decentipede.eclipse.debug.extensions.threadContributions"
+            objectClass="org.eclipse.jdt.debug.core.IJavaThread">
+         <menu
+               id="org.decentipede.eclipse.debug.extensions.thread"
+               label="Inspect">
+         </menu>
+         <action
+               class="org.decentipede.eclipse.debug.extensions.concurrency.InspectThreadObject"
+               id="org.decentipede.eclipse.debug.extensions.action1"
+               label="Thread Object"
+               menubarPath="org.decentipede.eclipse.debug.extensions.thread/group1"
+               tooltip="Inspect the properties of the Java object representing the thread">
+         </action>
+         <menu
+               id="org.decentipede.eclipse.debug.extensions.threadNavigate"
+               label="Navigate to">
+         </menu>
+         <action
+               class="org.decentipede.eclipse.debug.extensions.actions.NavigateToFrameHoldingMonitor"
+               id="org.decentipede.eclipse.debug.extensions.navigateToFrameHoldingMonitor"
+               label="Frame Holding Monitor"
+               menubarPath="org.decentipede.eclipse.debug.extensions.threadNavigate/group1">
+         </action>
+         <action
+               class="org.decentipede.eclipse.debug.extensions.NavigateToThreadBlocking"
+               id="org.decentipede.eclipse.debug.extensions.navigateToThreadBlocking"
+               label="Thread(group) blocking"
+               menubarPath="org.decentipede.eclipse.debug.extensions.threadNavigate/group1"
+               style="push">
+         </action>
+      </objectContribution>
+<!--      <objectContribution
             id="org.decentipede.eclipse.debug.extensions.frameFilters"
             objectClass="org.eclipse.jdt.debug.core.IJavaStackFrame">
          <menu
@@ -95,7 +128,7 @@
                label="Edit Filters ..."
                menubarPath="org.decentipede.eclipse.debug.extensions.frameFiltersMenu/settings">
          </action>
-      </objectContribution>
+      </objectContribution> -->
       
    </extension>
             
@@ -223,6 +256,15 @@
                   
             </menu>
       </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.services">
+      <serviceFactory
+            factoryClass="org.decentipede.eclipse.debug.services.FrameFilterFactory">
+         <service
+               serviceClass="org.decentipede.eclipse.debug.services.IFrameFilter">
+         </service>
+      </serviceFactory>
    </extension>
 <!--   <extension
          point="org.eclipse.debug.core.logicalStructureTypes">

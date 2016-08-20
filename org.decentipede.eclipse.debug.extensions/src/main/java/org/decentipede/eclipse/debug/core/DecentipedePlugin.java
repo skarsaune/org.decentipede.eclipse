@@ -1,14 +1,28 @@
 package org.decentipede.eclipse.debug.core;
 
-import no.kantega.decentipede.debug.extensions.action.FrameFilterRepository;
-
+import org.decentipede.debug.extensions.action.FrameFilterRepository;
 import org.decentipede.eclipse.debug.extensions.preferences.PreferenceConstants;
+import org.decentipede.eclipse.debug.services.IFrameFilter;
+import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.activities.WorkbenchActivityHelper;
+import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
+import org.osgi.framework.BundleContext;
 
-public class DecentipedePlugin {
+public class DecentipedePlugin extends Plugin {
+	
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+				
+		context.getServiceReference(IFrameFilter.class);
+		//ensure that filter service is started and hooked up to debug view
+		PlatformUI.getWorkbench().getService(ISelectionService.class);
+	}
 	
 	private static DecentipedePlugin plugin;
 	

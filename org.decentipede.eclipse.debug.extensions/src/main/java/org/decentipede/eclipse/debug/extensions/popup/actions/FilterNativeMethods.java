@@ -3,7 +3,6 @@ package org.decentipede.eclipse.debug.extensions.popup.actions;
 import org.decentipede.debug.extensions.action.ToggleableFilter;
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
 import org.decentipede.eclipse.debug.extensions.preferences.PreferenceConstants;
-import org.eclipse.debug.core.DebugException;
 import org.eclipse.jdt.debug.core.IJavaStackFrame;
 import org.eclipse.jdt.internal.debug.core.model.JDIStackFrame;
 
@@ -14,9 +13,9 @@ import org.eclipse.jdt.internal.debug.core.model.JDIStackFrame;
  *
  */
 @SuppressWarnings("restriction")
-public class FilterSyntethicMethods extends ToggleableFilter {
+public class FilterNativeMethods extends ToggleableFilter {
 
-	public FilterSyntethicMethods() {
+	public FilterNativeMethods() {
 		super();
 	}
 
@@ -25,13 +24,7 @@ public class FilterSyntethicMethods extends ToggleableFilter {
 
 		if (isFilterActive() && frame instanceof JDIStackFrame) {
 			
-			if(((JDIStackFrame) frame).getUnderlyingMethod().isSynthetic()) {
-				try {
-					return frame.getMethodName().contains("lambda");
-				} catch (DebugException e) {
-					return false;
-				}
-			}
+			return !((JDIStackFrame) frame).getUnderlyingMethod().isNative();
 		}
 		return true;
 	}
@@ -39,7 +32,7 @@ public class FilterSyntethicMethods extends ToggleableFilter {
 	@Override
 	public boolean isFilterActive() {
 		return DecentipedePlugin.getDefault().getPreferenceStore()
-				.getBoolean(PreferenceConstants.P_FILTER_SYNTETHIC_FRAMES);
+				.getBoolean(PreferenceConstants.P_FILTER_NATIVE_FRAMES);
 	}
 
 	@Override
@@ -48,14 +41,14 @@ public class FilterSyntethicMethods extends ToggleableFilter {
 		DecentipedePlugin
 				.getDefault()
 				.getPreferenceStore()
-				.setValue(PreferenceConstants.P_FILTER_SYNTETHIC_FRAMES,
+				.setValue(PreferenceConstants.P_FILTER_NATIVE_FRAMES,
 						toggled);
 		return toggled;
 	}
 
 	@Override
 	public String name() {
-		return "syntethic methods (except lambda methods)";
+		return "native methods";
 	}
 
 }

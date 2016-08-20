@@ -1,4 +1,4 @@
-package no.kantega.decentipede.debug.extensions.action;
+package org.decentipede.debug.extensions.action;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -9,8 +9,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
+import org.decentipede.eclipse.debug.extensions.popup.actions.FilterNativeMethods;
 import org.decentipede.eclipse.debug.extensions.popup.actions.FilterSyntethicMethods;
 import org.decentipede.eclipse.debug.extensions.preferences.PreferenceConstants;
+import org.decentipede.eclipse.debug.services.IFrameFilter;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.internal.ui.views.launch.LaunchView;
 import org.eclipse.debug.ui.IDebugView;
@@ -24,7 +26,7 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 
 @SuppressWarnings("restriction")
-public class FrameFilterRepository extends ViewerFilter implements ISelectionListener{
+public class FrameFilterRepository extends ViewerFilter implements ISelectionListener, IFrameFilter {
 	
 	
 	private Viewer myViewer;
@@ -188,14 +190,17 @@ public class FrameFilterRepository extends ViewerFilter implements ISelectionLis
 			return className.substring(finalDot + 1);
 	}
 
+	@Override
 	public Collection<? extends ToggleableFilter> allFilters() {
 
 		final Collection<ToggleableFilter> filters = new LinkedList<ToggleableFilter>();
 		filters.add(new FilterSyntethicMethods());
+		filters.add(new FilterNativeMethods());
 		filters.addAll(this.repo.values());
 		return filters;
 	}
 	
+	@Override
 	public void forceSync() {
 		if(this.myViewer != null) {
 			this.myViewer.refresh();

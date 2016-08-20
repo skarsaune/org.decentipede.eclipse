@@ -2,8 +2,7 @@ package org.decentipede.eclipse.debug.extensions.preferences;
 
 import java.io.IOException;
 
-import no.kantega.decentipede.debug.extensions.action.FrameFilterRepository;
-
+import org.decentipede.debug.extensions.action.FrameFilterRepository;
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
 import org.eclipse.jface.preference.ListEditor;
 import org.eclipse.swt.events.SelectionAdapter;

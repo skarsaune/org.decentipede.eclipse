@@ -5,9 +5,8 @@ import java.util.LinkedList;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import no.kantega.decentipede.debug.extensions.action.FrameFilterRepository;
-import no.kantega.decentipede.debug.extensions.action.FrameFilterSet;
-
+import org.decentipede.debug.extensions.action.FrameFilterRepository;
+import org.decentipede.debug.extensions.action.FrameFilterSet;
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;

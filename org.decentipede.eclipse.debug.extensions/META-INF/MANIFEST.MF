@@ -13,3 +13,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.expressions,
  org.eclipse.jface
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Activator: org.decentipede.eclipse.debug.core.DecentipedePlugin

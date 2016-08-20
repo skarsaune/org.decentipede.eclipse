@@ -1,13 +1,15 @@
 package org.decentipede.eclipse.debug.extensions.popup;
 
-import no.kantega.decentipede.debug.extensions.action.FrameFilterRepository;
-import no.kantega.decentipede.debug.extensions.action.ToggleableFilter;
-
+import org.decentipede.debug.extensions.action.FrameFilterRepository;
+import org.decentipede.debug.extensions.action.ToggleableFilter;
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
+import org.decentipede.eclipse.debug.extensions.preferences.PreferenceConstants;
+import org.decentipede.eclipse.debug.services.IFrameFilter;
 import org.eclipse.core.expressions.EvaluationResult;
 import org.eclipse.core.expressions.Expression;
 import org.eclipse.core.expressions.IEvaluationContext;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.internal.ui.SWTFactory;
 import org.eclipse.jface.action.ContributionItem;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -19,6 +21,7 @@ import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
 import org.eclipse.ui.services.IServiceLocator;
 
+@SuppressWarnings("restriction")
 public class StackFiltersDynamicMenuBuilder extends
 		ExtensionContributionFactory {
 
@@ -29,15 +32,9 @@ public class StackFiltersDynamicMenuBuilder extends
 	public void createContributionItems(IServiceLocator serviceLocator,
 			IContributionRoot additions) {
 		
-		final FrameFilterRepository repository = DecentipedePlugin.getDefault()
-				.getFrameFilterRepository();
+		final IFrameFilter repository = (IFrameFilter) serviceLocator.getService(IFrameFilter.class);
 
 		
-		ISelectionService service = (ISelectionService) serviceLocator.getService(org.eclipse.ui.ISelectionService.class);
-		//make sure we do not register more than once
-		service.removeSelectionListener(FrameFilterRepository.partIdOfConcern(), repository);
-		service.addSelectionListener(FrameFilterRepository.partIdOfConcern(), repository);
-		service.addSelectionListener(FrameFilterRepository.partIdOfConcern(), repository);
 		
 		additions.addContributionItem(new ContributionItem() {
 			@Override
@@ -63,6 +60,17 @@ public class StackFiltersDynamicMenuBuilder extends
 					filterItem.setText(filter.name());
 					filterItem.setSelection(filter.isFilterActive());
 				}
+				
+				new MenuItem(submenu, SWT.SEPARATOR);
+				MenuItem editFilters = new MenuItem(submenu, SWT.PUSH);
+				editFilters.setText("Edit filters ...");
+				editFilters.addSelectionListener(new SelectionAdapter() {
+					@SuppressWarnings("restriction")
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						SWTFactory.showPreferencePage(PreferenceConstants.PREFERENCE_PAGE);
+					}
+				});
 				
 				
 			}

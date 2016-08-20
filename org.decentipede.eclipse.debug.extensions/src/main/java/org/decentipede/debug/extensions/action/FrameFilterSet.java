@@ -1,4 +1,4 @@
-package no.kantega.decentipede.debug.extensions.action;
+package org.decentipede.debug.extensions.action;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import org.decentipede.eclipse.debug.core.DecentipedePlugin;
 import org.eclipse.jdt.debug.core.IJavaStackFrame;
-import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 public class FrameFilterSet extends ToggleableFilter implements Comparable<FrameFilterSet> , FrameFilter  {

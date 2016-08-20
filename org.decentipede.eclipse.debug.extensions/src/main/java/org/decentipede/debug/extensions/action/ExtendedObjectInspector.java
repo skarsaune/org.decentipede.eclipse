@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package no.kantega.decentipede.debug.extensions.action;
+package org.decentipede.debug.extensions.action;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -36,6 +36,7 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 /**
  * Base class for inspectors for objects
  */
+@SuppressWarnings("restriction")
 public abstract class ExtendedObjectInspector extends ObjectActionDelegate
 		implements IWorkbenchWindowActionDelegate {
 
@@ -45,7 +46,7 @@ public abstract class ExtendedObjectInspector extends ObjectActionDelegate
 	public void run(IAction action) {
 
 		IStructuredSelection currentSelection = getCurrentSelection();
-		if (isJavaObject(currentSelection)) {
+		if (isValidSelection(currentSelection)) {
 			try {
 				inspectObject(currentSelection);
 			} catch (DebugException e) {
@@ -126,11 +127,11 @@ public abstract class ExtendedObjectInspector extends ObjectActionDelegate
 	@Override
 	public void selectionChanged(IAction action, ISelection sel) {
 
-		action.setEnabled(isJavaObject(sel));
+		action.setEnabled(isValidSelection(sel));
 
 	}
 
-	protected boolean isJavaObject(ISelection sel) {
+	protected boolean isValidSelection(ISelection sel) {
 		return getSelectedType(sel) instanceof IJavaClassType;
 	}
 
