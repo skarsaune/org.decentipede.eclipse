@@ -63,6 +63,13 @@ public class FrameFilterRepository extends ViewerFilter implements ISelectionLis
 		repository.addFilter(new FrameFilterSet(
 				"Generated lambda bridges", Arrays.asList(
 						".+\\$\\$Lambda\\$.+line: -1"), false));
+		repository.addFilter(new FrameFilterSet(
+				"org.springframework.*", Arrays.asList(
+						"org.springframework.*"), false));
+		repository.addFilter(new FrameFilterSet(
+				"org.hibernate.*", Arrays.asList(
+						"org.hibernate.*"), false));
+		
 		
 		return repository;
 	}

@@ -27,8 +27,9 @@
             id="org.decentipede.debug.extensions.variableContribution"
             objectClass="org.eclipse.jdt.debug.core.IJavaVariable">
                      <menu
-               id="decentipede.debug.extensions.variable.menu"
-               label="Inspect">
+                           icon="icons/smiley.gif"
+                           id="decentipede.debug.extensions.variable.menu"
+                           label="Inspect">
             <separator
                   name="group1">
             </separator>
@@ -69,6 +70,7 @@
             id="org.decentipede.eclipse.debug.extensions.threadContributions"
             objectClass="org.eclipse.jdt.debug.core.IJavaThread">
          <menu
+               icon="icons/smiley.gif"
                id="org.decentipede.eclipse.debug.extensions.thread"
                label="Inspect">
          </menu>
@@ -80,6 +82,7 @@
                tooltip="Inspect the properties of the Java object representing the thread">
          </action>
          <menu
+               icon="icons/smiley.gif"
                id="org.decentipede.eclipse.debug.extensions.threadNavigate"
                label="Navigate to">
          </menu>
@@ -95,6 +98,19 @@
                label="Thread(group) blocking"
                menubarPath="org.decentipede.eclipse.debug.extensions.threadNavigate/group1"
                style="push">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.decentipede.eclipse.debug.extensions.frameContributions"
+            objectClass="org.eclipse.jdt.debug.core.IJavaStackFrame">
+         <action
+               class="org.decentipede.debug.extensions.action.DecompileMethodActionDelegate"
+               icon="icons/smiley.gif"
+               id="org.decentipede.eclipse.debug.extensions.action1"
+               label="Decompile current method"
+               style="push"
+               tooltip="Decompile Java code from byte codes from the debug connection">
          </action>
       </objectContribution>
 <!--      <objectContribution
@@ -235,7 +251,10 @@
             
             
             <menu
-                  label="Stack Frame Filters" id="org.decentipede.eclipse.debug.extensions.menu2" tooltip="tooltip">
+                  icon="icons/smiley.gif"
+                  id="org.decentipede.eclipse.debug.extensions.menu2"
+                  label="Stack Frame Filters"
+                  tooltip="tooltip">
 <!--                  <dynamic
                         id="org.decentipede.eclipse.debug.extensions.dynamic1" class="org.decentipede.eclipse.debug.extensions.popup.StackFiltersDynamicMenu">
                         
@@ -265,6 +284,21 @@
                serviceClass="org.decentipede.eclipse.debug.services.IFrameFilter">
          </service>
       </serviceFactory>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="org.decentipede.eclipse.debug.extensions.properties.ProcessExtendedPropertyPage"
+            icon="icons/smiley.gif"
+            id="org.decentipede.eclipse.debug.extensions.properties.samplePropertyPage"
+            name="Process Information - Extended"
+            nameFilter="*.*">
+         <enabledWhen>
+            <instanceof
+                  value="org.eclipse.debug.core.model.IDebugTarget">
+            </instanceof>
+         </enabledWhen>
+      </page>
    </extension>
 <!--   <extension
          point="org.eclipse.debug.core.logicalStructureTypes">

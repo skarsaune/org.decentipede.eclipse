@@ -14,3 +14,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jface
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Activator: org.decentipede.eclipse.debug.core.DecentipedePlugin
+Bundle-ClassPath: kantega-debug-util-1.0.0-SNAPSHOT.jar,
+ .,
+ fernflower-2.4.1.Final.jar,
+ external:$java.home$/../lib/tools.jar

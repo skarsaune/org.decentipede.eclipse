@@ -13,7 +13,6 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 /**
  * Show the classloader of selected object
  * 
- * @since 3.3
  */
 @SuppressWarnings("restriction")
 public class InspectClassLoaderActionDelegate extends ExtendedObjectInspector
