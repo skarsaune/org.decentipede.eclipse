@@ -8,17 +8,22 @@
    <description url="http://www.example.com/description">
       Decentipede contains various extensions and extra features to
 debugging in Eclipse: 
-
 - stack frame filters
+- extra process information
    </description>
 
    <copyright url="http://www.example.com/copyright">
-      Works in progress by Martin Skarsaune
+      Works in progress by Martin Skarsaune.
+Includes Fernflower decompiler developed by JetBrains
    </copyright>
 
    <license url="http://www.eclipse.org">
       Eclipse Public License - v 1.0 - see http://www.eclipse.org
    </license>
+
+   <url>
+      <discovery label="Decentipede update site" url="https://skarsaune.github.io/decentipede.update.site"/>
+   </url>
 
    <plugin
          id="org.decentipede.eclipse.debug.extensions"
