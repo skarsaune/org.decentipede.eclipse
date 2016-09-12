@@ -107,11 +107,20 @@
          <action
                class="org.decentipede.debug.extensions.action.DecompileMethodActionDelegate"
                icon="icons/smiley.gif"
-               id="org.decentipede.eclipse.debug.extensions.action1"
-               label="Decompile current method"
+               id="org.decentipede.eclipse.debug.extensions.decompileMethod"
+               label="Decompile current method (BETA)"
                style="push"
                tooltip="Decompile Java code from byte codes from the debug connection">
          </action>
+         <action
+               class="org.decentipede.debug.extensions.action.DecompileLineActionDelegate"
+               icon="icons/smiley.gif"
+               id="org.decentipede.eclipse.debug.extensions.decompileLine"
+               label="Decompile current line - TAKE1 (BETA)"
+               style="push"
+               tooltip="Decompile Java code from byte codes from the debug connection">
+         </action>
+         
       </objectContribution>
 <!--      <objectContribution
             id="org.decentipede.eclipse.debug.extensions.frameFilters"
