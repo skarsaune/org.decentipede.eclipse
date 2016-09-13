@@ -1,22 +1,21 @@
 package org.decentipede.debug.extensions.action;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Collections;
-
-import no.kantega.debug.decompile.ClassFileReverseEnginerer;
 
 import org.eclipse.jdt.debug.core.IJavaStackFrame;
 import org.eclipse.jdt.internal.debug.ui.actions.ObjectActionDelegate;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.jetbrains.java.decompiler.main.DecompilerContext;
 
 import com.sun.jdi.Location;
 
+@SuppressWarnings("restriction")
 public abstract class DecompileActionDelegate extends ObjectActionDelegate
 implements IWorkbenchWindowActionDelegate {
 
@@ -28,7 +27,10 @@ implements IWorkbenchWindowActionDelegate {
 		if(this.fetchLocation != null) {
 			try {
 				DecompilerContext.initContext(Collections.EMPTY_MAP);
-				System.out.println(decompile());
+				MessageBox msg=new MessageBox(this.getPart().getSite().getShell());
+				msg.setMessage(decompile());
+				msg.open();
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
